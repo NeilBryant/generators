@@ -14,7 +14,7 @@
     "express": "3.x"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test-verbose"
   },
   "repository": {
     "type": "git",
