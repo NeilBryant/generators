@@ -22,6 +22,7 @@ global.flushFS = flushFS;
 global.getFile = function(path) {
     return memfs[path];
 };
+global.getFunctionBlock = getFunctionBlock;
 
 var memfs = {}, writeFileSync, readFileSync, writeSync, closeSync, existsSync,
     mkdirSync, chmodSync, readFileSync, exit;
@@ -60,3 +61,18 @@ function unstubFS() {
 function flushFS() {
     memfs = {};
 }
+
+// Retrieve the block of a function given it's name.
+// eg, getFunctionBlock('flushFS', 'thistext')
+// Matching indentations should work, and should work in both js
+// and coffee if we drop the last line (eg, ignore the first line
+// with the same indentation)
+function getFunctionBlock(fnName, script) {
+    var re = new RegExp("^(\\s*)(?:.*?" + RegExp.quote(fnName) + ".*(?:\\n*\\1\\s+.*|\\n\\s*$)*(?:\\n*\\1[\\s\\)\\}\\;])*)", "m");
+    var ret = re.exec(script);
+    return ret[0];
+}
+
+RegExp.quote = function(str) {
+    return (str+'').replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+};
