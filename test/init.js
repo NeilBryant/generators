@@ -62,7 +62,7 @@ function flushFS() {
     memfs = {};
 }
 
-// Retrieve the block of a function given it's name.
+// Retrieve the block of a function given its' name.
 // eg, getFunctionBlock('flushFS', 'thistext')
 // Matching indentations should work, and should work in both js
 // and coffee if we drop the last line (eg, ignore the first line
