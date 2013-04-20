@@ -102,6 +102,13 @@ describe('grammar', function() {
         equate('TaBlE', plural, 'TaBlEs')
     });
 
+    it('should properly capitalize nouns', function() {
+        toNew = 'ABCD'.toLowerCase();
+        equate('ABCD', toNew, 'abcd');
+        toNew = 'abcd'.toUpperCase();
+        equate('abcd', toNew, 'ABCD');
+    });
+
 });
 
 function equate(base, guess, correct) {
